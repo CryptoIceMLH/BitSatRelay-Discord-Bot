@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block page %}
+<div class="row q-col-gutter-md">
+  <div class="col-12 col-md-8 q-gutter-y-md">
+    <q-card>
+      <q-card-section>
+        <h5 class="q-my-none">BitSatRelay Discord Bot</h5>
+        <p>Display your BitSatRelay network stats in Discord</p>
+      </q-card-section>
+    </q-card>
+
+    <q-card>
+      <q-card-section>
+        <h6 class="q-my-none">Bot Settings</h6>
+
+        <q-input
+          v-model="settings.bot_token"
+          type="password"
+          label="Discord Bot Token"
+          hint="Get this from Discord Developer Portal"
+          class="q-mb-md"
+        ></q-input>
+
+        <q-input
+          v-model.number="settings.rotation_speed"
+          type="number"
+          label="Rotation Speed (seconds)"
+          hint="How often to change the displayed stat"
+          class="q-mb-md"
+        ></q-input>
+
+        <q-input
+          v-model="settings.lnbits_api_url"
+          label="LNbits API URL"
+          hint="Base URL for BitSatCredit API"
+          class="q-mb-md"
+        ></q-input>
+
+        <q-toggle
+          v-model="settings.enabled"
+          label="Bot Enabled"
+          class="q-mb-md"
+        ></q-toggle>
+
+        <q-btn
+          @click="saveSettings"
+          color="primary"
+          label="Save Settings"
+        ></q-btn>
+      </q-card-section>
+    </q-card>
+
+    <q-card>
+      <q-card-section>
+        <h6 class="q-my-none">Current Status</h6>
+        <p>Bot Status: <strong v-if="settings.enabled">🟢 Enabled</strong><strong v-else>🔴 Disabled</strong></p>
+        <p>Rotation Speed: {{ settings.rotation_speed }} seconds</p>
+        <p>API URL: {{ settings.lnbits_api_url }}</p>
+      </q-card-section>
+    </q-card>
+
+    <q-card>
+      <q-card-section>
+        <h6 class="q-my-none">Status Display Rotation</h6>
+        <p>The bot will rotate through these 4 statuses:</p>
+        <ul>
+          <li>📊 X users | Y messages</li>
+          <li>🛰️ Watching satellite network</li>
+          <li>⚡ X sats per message</li>
+          <li>🟢 System: Online (or 🔴 Offline)</li>
+        </ul>
+      </q-card-section>
+    </q-card>
+  </div>
+
+  <div class="col-12 col-md-4">
+    <q-card>
+      <q-card-section>
+        <h6 class="q-my-none">Setup Instructions</h6>
+        <ol>
+          <li>Create bot in Discord Developer Portal</li>
+          <li>Enable Presence Intent</li>
+          <li>Copy bot token and paste above</li>
+          <li>Add clickable link to bot profile (see below)</li>
+          <li>Invite bot to your server</li>
+          <li>Enable bot and save settings</li>
+        </ol>
+        <q-btn
+          href="https://discord.com/developers/applications"
+          target="_blank"
+          color="primary"
+          label="Discord Developer Portal"
+          icon="launch"
+        ></q-btn>
+      </q-card-section>
+    </q-card>
+
+    <q-card class="q-mt-md">
+      <q-card-section>
+        <h6 class="q-my-none">Add Clickable Link</h6>
+        <p class="text-caption">In Discord Developer Portal:</p>
+        <ol class="text-caption">
+          <li>Go to General Information tab</li>
+          <li>Scroll to "LINKS" section</li>
+          <li>Click "Add Link"</li>
+          <li>Label: "Top Up Credits"</li>
+          <li>URL: https://lnbits.molonlabe.holdings/bitsatcredit/6e1faaf6356b43029124fdeb5f93a297</li>
+        </ol>
+      </q-card-section>
+    </q-card>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+new Vue({
+  el: '#vue',
+  mixins: [windowMixin],
+  data() {
+    return {
+      settings: {
+        bot_token: '',
+        enabled: false,
+        rotation_speed: 30,
+        lnbits_api_url: 'https://lnbits.molonlabe.holdings'
+      }
+    }
+  },
+  methods: {
+    async getSettings() {
+      try {
+        const { data } = await LNbits.api.request(
+          'GET',
+          '/bitsatcredit_discord/api/v1/settings'
+        )
+        if (data) {
+          this.settings = data
+        }
+      } catch (error) {
+        console.error('Error loading settings:', error)
+      }
+    },
+    async saveSettings() {
+      try {
+        await LNbits.api.request(
+          'POST',
+          '/bitsatcredit_discord/api/v1/settings',
+          null,
+          this.settings
+        )
+        this.$q.notify({
+          type: 'positive',
+          message: 'Settings saved! Bot will update shortly.'
+        })
+      } catch (error) {
+        LNbits.utils.notifyApiError(error)
+      }
+    }
+  },
+  created() {
+    this.getSettings()
+  }
+})
+</script>
+{% endblock %}
