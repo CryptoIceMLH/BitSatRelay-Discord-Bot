@@ -1,0 +1,27 @@
+{
+  "featured": ["bitsatcredit_discord"],
+  "extensions": [
+    {
+      "id": "bitsatcredit_discord",
+      "name": "BitSatCredit Discord",
+      "short_description": "Display BitSatRelay network stats as Discord bot status",
+      "icon": "https://raw.githubusercontent.com/CryptoIceMLH/BitSatRelay-Discord-Bot/main/bitsatcredit_discord/static/icon.png",
+      "contributors": [
+        {
+          "name": "CryptoIceMLH",
+          "github": "CryptoIceMLH"
+        }
+      ],
+      "repo": "https://github.com/CryptoIceMLH/BitSatRelay-Discord-Bot",
+      "version": "1.0.0",
+      "min_lnbits_version": "0.12.0",
+      "archive": "https://github.com/CryptoIceMLH/BitSatRelay-Discord-Bot/archive/refs/tags/v1.0.0.zip",
+      "hash": "8f701dcfc73ba1a2e10c5597dde49793ff5ce2f8a6e11be26069be2ccc7e1d99",
+      "dependencies": [
+        "bitsatcredit"
+      ],
+      "is_admin_only": true,
+      "tile": "bitsatcredit_discord/templates/bitsatcredit_discord/index.html"
+    }
+  ]
+}
