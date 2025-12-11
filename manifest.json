@@ -13,10 +13,10 @@
         }
       ],
       "repo": "https://github.com/CryptoIceMLH/BitSatRelay-Discord-Bot",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "min_lnbits_version": "0.12.0",
-      "archive": "https://github.com/CryptoIceMLH/BitSatRelay-Discord-Bot/archive/refs/tags/v1.0.0.zip",
-      "hash": "8f701dcfc73ba1a2e10c5597dde49793ff5ce2f8a6e11be26069be2ccc7e1d99",
+      "archive": "https://github.com/CryptoIceMLH/BitSatRelay-Discord-Bot/archive/refs/tags/v1.0.1.zip",
+      "hash": "ca40cee91b6a9b74d572da85d9cd438fa2f9a41b09e1ad0e24bb21fa749262b0",
       "dependencies": [
         "bitsatcredit"
       ],
