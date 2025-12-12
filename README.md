@@ -60,7 +60,7 @@ This LNbits extension creates a Discord bot that monitors your BitSatCredit exte
 8. Scroll down to **"LINKS"** section
 9. Click **"Add Link"**
 10. **Label**: `Top Up Credits`
-11. **URL**: `https://lnbits.molonlabe.holdings/bitsatcredit/6e1faaf6356b43029124fdeb5f93a297`
+11. **URL**: `
 12. **Save changes**
 
 ### Step 3: Invite Bot to Your Server
@@ -110,7 +110,7 @@ systemctl restart lnbits
 3. Click to open the extension page
 4. **Paste your Discord bot token** from Step 1
 5. Set **rotation speed** (default: 30 seconds)
-6. Verify **API URL**: `https://lnbits.molonlabe.holdings`
+6. Verify **API URL**: `
 7. Toggle **"Bot Enabled"** to ON
 8. Click **"Save Settings"**
 
@@ -122,7 +122,7 @@ systemctl restart lnbits
 
 - **Bot Token**: Discord bot token from Developer Portal (required)
 - **Rotation Speed**: How often to change the displayed stat (in seconds, default: 30)
-- **LNbits API URL**: Base URL for BitSatCredit API (default: https://lnbits.molonlabe.holdings)
+- **LNbits API URL**: Base URL for BitSatCredit API 
 - **Enabled**: Toggle bot on/off
 
 ### Status Rotation
@@ -218,8 +218,8 @@ MIT License - see [LICENSE](LICENSE) file
 ## Support
 
 - **Issues**: https://github.com/yourusername/BitSatRelay-Discord-Bot/issues
-- **Website**: https://lnbits.molonlabe.holdings
-- **Discord**: [Your Discord Server]
+- **Website**: https://www.molonlabe.holdings
+-
 
 ## Credits
 
