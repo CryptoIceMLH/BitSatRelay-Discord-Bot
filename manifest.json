@@ -16,7 +16,7 @@
       "version": "1.0.14",
       "min_lnbits_version": "0.12.0",
       "archive": "https://github.com/CryptoIceMLH/BitSatRelay-Discord-Bot/archive/refs/tags/v1.0.14.zip",
-      "hash": "PLACEHOLDER_HASH",
+      "hash": "b19dfb76ef14924305db971d71b2fd72c9db1209ff69c7850cb24a996bd5bb39",
       "dependencies": [
         "bitsatcredit"
       ],
