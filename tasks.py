@@ -147,7 +147,7 @@ async def update_discord_status(settings):
                 timeout=5.0
             )
             price_data = price_response.json()
-            price_per_msg = price_data.get('price', 0)
+            price_per_msg = price_data.get('price_per_message_sats', 0)
 
         except Exception as e:
             print(f"Error fetching stats: {e}")
@@ -158,7 +158,7 @@ async def update_discord_status(settings):
 
     # Default statuses
     statuses.append(('custom', f"📊 {stats['total_users']:,} users | {stats['total_messages']:,} messages"))
-    statuses.append(('watching', 'satellite network'))
+    statuses.append(('custom', '🛰️ Watching satellite network'))
     statuses.append(('custom', f"⚡ {price_per_msg} sats per message"))
 
     # System online/offline status
