@@ -25,7 +25,7 @@ async def wait_for_discord_updates():
                 continue
 
             # Connect to Discord Gateway if not connected
-            if gateway_ws is None or gateway_ws.closed:
+            if gateway_ws is None or gateway_ws.close_code is not None:
                 await connect_to_gateway(settings['bot_token'])
 
             # Update status
@@ -90,7 +90,7 @@ async def send_heartbeat():
     """Send heartbeat to keep connection alive"""
     global gateway_ws, heartbeat_interval, sequence
 
-    while gateway_ws and not gateway_ws.closed:
+    while gateway_ws and gateway_ws.close_code is None:
         try:
             await asyncio.sleep(heartbeat_interval)
             heartbeat = {"op": 1, "d": sequence}
@@ -124,7 +124,7 @@ async def update_discord_status(settings):
     """Fetch stats and update Discord bot status"""
     global gateway_ws
 
-    if gateway_ws is None or gateway_ws.closed:
+    if gateway_ws is None or gateway_ws.close_code is not None:
         return
 
     # Fetch stats from BitSatCredit API using httpx
