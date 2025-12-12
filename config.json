@@ -9,10 +9,8 @@
     }
   ],
   "hidden": false,
-  "migration_module": "bitsatcredit_discord.migrations",
-  "db_name": "ext_bitsatcredit_discord",
   "min_lnbits_version": "0.12.0",
   "tile_root": "/bitsatcredit_discord/static",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "license": "MIT"
 }
