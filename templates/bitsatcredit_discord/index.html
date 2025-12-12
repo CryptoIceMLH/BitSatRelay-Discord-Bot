@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% from "macros.jinja" import window_vars with context %}
+
 {% block page %}
 <div class="row q-col-gutter-md">
   <div class="col-12 col-md-8 q-gutter-y-md">
@@ -114,10 +116,11 @@
 {% endblock %}
 
 {% block scripts %}
+{{ window_vars(user) }}
 <script>
-new Vue({
+window.app = new Vue({
   el: '#vue',
-  mixins: [windowMixin],
+  mixins: [window.windowMixin],
   data() {
     return {
       settings: {
