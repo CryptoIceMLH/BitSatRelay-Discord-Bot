@@ -6,7 +6,9 @@ db = Database("ext_bitsatcredit_discord")
 async def get_settings():
     """Get Discord bot settings from database"""
     row = await db.fetchone("SELECT * FROM discord_settings LIMIT 1")
-    return row
+    if row:
+        return dict(row)
+    return None
 
 async def update_settings(data: dict):
     """Update or create settings"""
@@ -25,7 +27,7 @@ async def update_settings(data: dict):
                 data.get("rotation_speed", 30),
                 data.get("lnbits_api_url", "https://lnbits.molonlabe.holdings"),
                 datetime.now(),
-                existing.id
+                existing["id"]
             )
         )
     else:
