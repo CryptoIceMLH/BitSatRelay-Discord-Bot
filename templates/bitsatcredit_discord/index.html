@@ -39,6 +39,15 @@
           class="q-mb-md"
         ></q-input>
 
+        <q-input
+          v-model="settings.announcements"
+          type="textarea"
+          label="Custom Announcements (one per line)"
+          hint="Add custom messages that will rotate with the stats"
+          rows="5"
+          class="q-mb-md"
+        ></q-input>
+
         <q-toggle
           v-model="settings.enabled"
           label="Bot Enabled"
@@ -65,12 +74,13 @@
     <q-card>
       <q-card-section>
         <h6 class="q-my-none">Status Display Rotation</h6>
-        <p>The bot will rotate through these 4 statuses:</p>
+        <p>The bot will rotate through these statuses:</p>
         <ul>
           <li>📊 X users | Y messages</li>
           <li>🛰️ Watching satellite network</li>
           <li>⚡ X sats per message</li>
           <li>🟢 System: Online (or 🔴 Offline)</li>
+          <li><strong>+ Your custom announcements</strong></li>
         </ul>
       </q-card-section>
     </q-card>

@@ -15,3 +15,14 @@ async def m001_initial(db):
         );
         """
     )
+
+async def m002_add_announcements(db):
+    """
+    Add announcements field for custom scrolling messages
+    """
+    await db.execute(
+        """
+        ALTER TABLE discord_settings
+        ADD COLUMN announcements TEXT DEFAULT '[]'
+        """
+    )

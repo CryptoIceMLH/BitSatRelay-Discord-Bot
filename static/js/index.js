@@ -8,7 +8,8 @@ window.app = Vue.createApp({
         bot_token: '',
         enabled: false,
         rotation_speed: 30,
-        lnbits_api_url: 'https://lnbits.molonlabe.holdings'
+        lnbits_api_url: 'https://lnbits.molonlabe.holdings',
+        announcements: ''
       }
     }
   },
@@ -20,6 +21,12 @@ window.app = Vue.createApp({
           '/bitsatcredit_discord/api/v1/settings'
         )
         if (data) {
+          // Convert announcements array to newline-separated string for textarea
+          if (data.announcements && Array.isArray(data.announcements)) {
+            data.announcements = data.announcements.join('\n')
+          } else {
+            data.announcements = ''
+          }
           this.settings = data
         }
       } catch (error) {
@@ -28,11 +35,20 @@ window.app = Vue.createApp({
     },
     async saveSettings() {
       try {
+        // Convert announcements from textarea string to array
+        const settingsToSave = { ...this.settings }
+        if (typeof settingsToSave.announcements === 'string') {
+          settingsToSave.announcements = settingsToSave.announcements
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.length > 0)
+        }
+
         await LNbits.api.request(
           'POST',
           '/bitsatcredit_discord/api/v1/settings',
           null,
-          this.settings
+          settingsToSave
         )
         this.$q.notify({
           type: 'positive',

@@ -11,6 +11,6 @@
   "hidden": false,
   "min_lnbits_version": "0.12.0",
   "tile_root": "/bitsatcredit_discord/static",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "license": "MIT"
 }
