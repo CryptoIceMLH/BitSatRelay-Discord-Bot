@@ -1,0 +1,26 @@
+[project]
+name = "lnbits-bitsatcredit-discord"
+version = "1.0.2"
+description = "Discord bot integration for BitSatRelay - displays live network stats"
+authors = [{name = "CryptoIceMLH"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "lnbits>=1.0.0",
+    "discord.py>=2.0.0",
+    "requests>=2.28.0"
+]
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 132
+
+[tool.mypy]
+files = "bitsatcredit_discord"

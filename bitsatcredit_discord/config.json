@@ -1,0 +1,18 @@
+{
+  "name": "BitSatCredit Discord",
+  "short_description": "Display BitSatRelay network stats as Discord bot status",
+  "tile": "/bitsatcredit_discord/static/image/discord_bot.png",
+  "contributors": [
+    {
+      "name": "CryptoIceMLH",
+      "github": "https://github.com/CryptoIceMLH"
+    }
+  ],
+  "hidden": false,
+  "migration_module": "bitsatcredit_discord.migrations",
+  "db_name": "ext_bitsatcredit_discord",
+  "min_lnbits_version": "0.12.0",
+  "tile_root": "/bitsatcredit_discord/static",
+  "version": "1.0.2",
+  "license": "MIT"
+}
