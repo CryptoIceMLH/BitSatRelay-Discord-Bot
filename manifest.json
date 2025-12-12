@@ -16,7 +16,7 @@
       "version": "1.0.12",
       "min_lnbits_version": "0.12.0",
       "archive": "https://github.com/CryptoIceMLH/BitSatRelay-Discord-Bot/archive/refs/tags/v1.0.12.zip",
-      "hash": "TBD",
+      "hash": "86b07311b5f6fb7cad371aa58560f94797d9333fb191228c30ce4cc5a7063d29",
       "dependencies": [
         "bitsatcredit"
       ],
