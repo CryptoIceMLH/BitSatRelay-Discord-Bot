@@ -1,17 +1,16 @@
 import asyncio
-import discord
 import requests
 import time
-from discord.ext import tasks
 
 from .crud import get_settings
 
-# Discord bot setup
-intents = discord.Intents.default()
-bot = discord.Client(intents=intents)
+# Discord bot - initialized lazily
+bot = None
 
 async def wait_for_discord_updates():
     """Main background task - runs continuously"""
+    global bot
+
     while True:
         try:
             settings = await get_settings()
@@ -19,6 +18,22 @@ async def wait_for_discord_updates():
             if not settings or not settings.enabled or not settings.bot_token:
                 await asyncio.sleep(30)
                 continue
+
+            # Lazy import discord.py (only when actually needed)
+            if bot is None:
+                try:
+                    import discord
+                    intents = discord.Intents.default()
+                    bot = discord.Client(intents=intents)
+
+                    @bot.event
+                    async def on_ready():
+                        print(f"Discord bot logged in as {bot.user}")
+
+                except ImportError:
+                    print("discord.py not installed. Install with: pip install discord.py>=2.0.0")
+                    await asyncio.sleep(300)  # Wait 5 minutes before retrying
+                    continue
 
             # Start Discord bot if not running
             if not bot.is_ready():
@@ -66,6 +81,9 @@ async def update_discord_status(settings):
     except:
         price_per_msg = 0
 
+    # Import discord for activity types
+    import discord
+
     # Determine which status to show (rotate through 4 options)
     cycle = int(time.time() / settings.rotation_speed) % 4
 
@@ -95,8 +113,3 @@ async def update_discord_status(settings):
         activity = discord.CustomActivity(name=status_text)
 
     await bot.change_presence(activity=activity)
-
-@bot.event
-async def on_ready():
-    """Called when bot connects to Discord"""
-    print(f"Discord bot logged in as {bot.user}")
