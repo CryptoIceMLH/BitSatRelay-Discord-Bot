@@ -57,8 +57,8 @@
       <q-card-section>
         <h6 class="q-my-none">Current Status</h6>
         <p>Bot Status: <strong v-if="settings.enabled">🟢 Enabled</strong><strong v-else>🔴 Disabled</strong></p>
-        <p>Rotation Speed: {{ settings.rotation_speed }} seconds</p>
-        <p>API URL: {{ settings.lnbits_api_url }}</p>
+        <p>Rotation Speed: ${ settings.rotation_speed } seconds</p>
+        <p>API URL: ${ settings.lnbits_api_url }</p>
       </q-card-section>
     </q-card>
 
@@ -117,54 +117,7 @@
 
 {% block scripts %}
 {{ window_vars(user) }}
-<script>
-window.app = new Vue({
-  el: '#vue',
-  mixins: [window.windowMixin],
-  data() {
-    return {
-      settings: {
-        bot_token: '',
-        enabled: false,
-        rotation_speed: 30,
-        lnbits_api_url: 'https://lnbits.molonlabe.holdings'
-      }
-    }
-  },
-  methods: {
-    async getSettings() {
-      try {
-        const { data } = await LNbits.api.request(
-          'GET',
-          '/bitsatcredit_discord/api/v1/settings'
-        )
-        if (data) {
-          this.settings = data
-        }
-      } catch (error) {
-        console.error('Error loading settings:', error)
-      }
-    },
-    async saveSettings() {
-      try {
-        await LNbits.api.request(
-          'POST',
-          '/bitsatcredit_discord/api/v1/settings',
-          null,
-          this.settings
-        )
-        this.$q.notify({
-          type: 'positive',
-          message: 'Settings saved! Bot will update shortly.'
-        })
-      } catch (error) {
-        LNbits.utils.notifyApiError(error)
-      }
-    }
-  },
-  created() {
-    this.getSettings()
-  }
-})
-</script>
+
+<script src="{{ static_url_for('bitsatcredit_discord/static', path='js/index.js') }}"></script>
+
 {% endblock %}
