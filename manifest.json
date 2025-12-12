@@ -5,7 +5,7 @@
       "id": "bitsatcredit_discord",
       "name": "BitSatCredit Discord",
       "short_description": "Display BitSatRelay network stats as Discord bot status",
-      "icon": "https://raw.githubusercontent.com/CryptoIceMLH/BitSatRelay-Discord-Bot/main/bitsatcredit_discord/static/icon.png",
+      "icon": "https://raw.githubusercontent.com/CryptoIceMLH/BitSatRelay-Discord-Bot/main/static/image/icon.png",
       "contributors": [
         {
           "name": "CryptoIceMLH",
